@@ -6,6 +6,13 @@ $code-color: #264688;
 
 /*-- scss:rules --*/
 
+.highlight-last  {
+  color:  #138541;
+  .current-fragment {
+    color: #0b4d25;
+  }
+}
+
 .reveal .slide blockquote {
   border-left: 3px solid $text-muted;
   padding-left: 0.5em;
@@ -82,7 +89,7 @@ font-size: 30px;
   width: 100%;
   margin-left: 200px;
   text-align: center;
-  font-size: 0.7em;
+  font-size: 0.85em;
   color: #264688;
   z-index: 2;
   margin-right: 250px;
@@ -95,3 +102,4 @@ font-size: 30px;
   max-height: unset !important;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap");

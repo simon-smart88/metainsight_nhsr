@@ -17,142 +17,189 @@ date-format: "Do MMMM YYYY"
 preload-iframes: false
 ---
 
-## Network meta-analysis can help determine the "best" treatment option
+## Network meta-analysis can help determine the 'best' treatment option
 
 ::: columns
 ::: {.column width="50%"}
-<img src= "images/network_plot.svg" >
+<img src= "images/network_plot.png" height = 600 >
 :::
 ::: {.column width="50%"}
-<img src= "images/ranking_plot.png" >
+<img src= "images/ranking_plot.png" height = 600>
 :::
+:::
+
+::: footer
+Data from Elliot & Meyer (2007) <a href="https://doi.org/10.1016/s0140-6736(07)60108-1" target="_blank">10.1016/s0140-6736(07)60108-1</a>
 :::
 
 ## Complex reviews require extensive statistical and programming knowledge
 
-- Bewildering R packages:
-  - BUGSnet, bnma, coda, gemtc, meta, metafor, netmeta
+::: {.incremental .highlight-last}
+- BUGSnet, bnma, coda, gemtc, meta, metafor, netmeta
 - Some dependent on JAGS which may be hard to install
 - Require data in different formats and use different terminology
+:::
 
 ## Shiny removes barriers for accessing cutting-edge methods
 
 ::: columns
-::: {.column width="55%"}
-- MetaInsight launched in 2019, has users worldwide and increasing citations and use in CROs
-- Originally developed by statisticians, but increasingly in collaboration with developers (Bradbury *et al.* 2024)
+::: {.column width="60%"}
+- MetaInsight was launched in 2019 to make NMA more accessible 
+- Originally developed by statisticians, but increasingly in collaboration with developers 
 :::
-::: {.column width="45%"}
-```{r echo = FALSE, eval = TRUE, fig.height=10}
+::: {.column width="40%"}
+<img src = "images/citations.png" >
+:::
+:::
+
+```{r echo = FALSE, eval = FALSE}
+png("images/citations.png", 600, 600)
 Year <- 2020:2025	
 Citations <- c(6, 17, 28, 57, 66, 85)
 `Cumulative citations` <- cumsum(Citations)
 
 par(cex = 1.5, bg = '#e4fbf8')
-plot(Year, `Cumulative citations`, type = "l", col = "darkblue", lwd = 4)
+plot(Year, `Cumulative citations`, type = "l", col = "darkblue", lwd = 4, ylab = "", main = "Cumulative citations")
+dev.off()
 ```
-:::
-:::
+
 
 ::: footer
+Owen *et al.* (2019) <a href="https://doi.org/10.1002/jrsm.1373" target="_blank">10.1002/jrsm.1373</a>; Bradbury *et al.* (2025) <a href="https://doi.org/10.1186/s12874-024-02450-9" target="_blank">10.1186/s12874-024-02450-9</a>
+:::
 
-Adapted from <a href="https://r4ds.hadley.nz/intro" target="_blank">Wickham (2022)</a>
-10.1186/s12874-024-02450-9
-
+::: notes
+has users worldwide and increasing citations and use in CROs
 :::
 
 ## 
 
 <img src= "images/metainsight_existing.png" >
 
-## Lack of reproducibility can limit uptake
+::: footer
+<a href="https://crsu.shinyapps.io/MetaInsight/" target="_blank">crsu.shinyapps.io/MetaInsight</a> 
+:::
 
+## The 'black box' nature of apps can limit uptake
+
+::: columns
+::: {.column width="70%"}
+:::{.incremental .highlight-last}
 - {shinyscholar} was forked from {wallace} to make development of reproducible apps easier
 - Convert core functionality into functions and package
-- The app becomes an interface to the functions, purely focused on interactivity
+- App becomes an interface to the functions, dealing with interactivity
+:::
+:::
+::: {.column width="30%"}
+<img src="images/shinyscholar.png" width="auto" height="auto" align="right" alt="Hex logo of shinyscholar showing a black and white mortar cap">
+:::
+:::
+
+##
+
+<img src= "images/metainsight_new.png" >
+
+::: footer
+<a href="https://crsu.shinyapps.io/MetaInsight_Scholar/" target="_blank">crsu.shinyapps.io/MetaInsight_Scholar</a> 
+:::
 
 ## Reproducibility relies on a strict structure
-
+::: {.incremental .highlight-last}
 - Each module has an id made up of the component and module e.g. `summary_network`
 - The module calls a synonymous function `summary_network()`
 - Input values are stored in `common$meta$summary_network$<input id>`
 - Values are knitted into an .Rmd chunk and combined to create a .qmd
+:::
 
-## Reproducibility relies on a strict structure
+## Reproducibility relies on a strict structure {.mediumcode}
 
+::: {.fragment .fade-in}
 ````markdown
 ```{{asis, echo = {{summary_network_knit}}, eval = {{summary_network_knit}}, include = {{summary_network_knit}}}}
 ### Display the networks for the original data and data with excluded studies.
-```
-```{{asis, echo = {{summary_network_knit}}, eval = {{summary_network_knit}}, include = {{summary_network_knit}}}}
 {r,  results = 'asis'}
 ```
 ```{{r, echo = {{summary_network_knit}}, include = {{summary_network_knit}}}}
-network_style <- {{summary_network_style}}
-
-summary_network_all <- summary_network(frequentist_all, bugsnet_all, network_style, {{summary_network_label_all}}, "Network plot of all studies")
-htmltools::HTML(summary_network_all)
+summary_network(frequentist_all, 
+                bugsnet_all, 
+                {{summary_network_style}}, 
+                {{summary_network_label_all}}, 
+                "Network plot of all studies")
 ```
 ````
+:::
 
-## Reproducibility relies on a strict structure
+<br/>
+
+::: {.fragment .fade-in}
 
 ````markdown
 ### Display the networks for the original data and data with excluded studies.
 
 ```{{r, results = 'asis'}}
-network_style <- "netplot"
-
-summary_network_all <- summary_network(frequentist_all, bugsnet_all, network_style, 1, "Network plot of all studies")
-htmltools::HTML(summary_network_all$svg)
+summary_network(frequentist_all, 
+                bugsnet_all, 
+                "netplot", 
+                1, 
+                "Network plot of all studies")
 ```
 ````
+:::
 
 ## Reproducibility also enables improved reporting
 ::: columns
-::: {.column width="40%"}
-- Use as the basis for producing a publication
+::: {.column width="50%"}
+- Use as the basis for writing a publication
 - Rendered in the app to produce an html report
 :::
-::: {.column width="60%" style="margin-top: -80px;"}
+::: {.column style="margin-top: -80px;"}
 <img src = "images/report.png" height = 700px>
 :::
 :::
 
-## Risk of bias
-
+## Incorporating risk of bias scores improves sensitivity analyses
+::: {.incremental .highlight-last}
 - MetaInsight enables sensitivity analyses by excluding studies
 - During reviews, risk of bias information can be collected e.g.
   - Randomisation, blinding, missing data
 - Users can now upload these scores and use them to guide sensitivity analyses
+:::
 
-## Integration with CiNEMA helps to evaluate
+## Integration with CiNEMA helps to evaluate confidence in findings
+
 ::: columns
 ::: {.column width="50%"}
-- is an app developed to evaluate confidence in NMA results
+<img src = "images/cinema_logo.svg">
+
 - Uses risk of bias scores for *studies* to evaluate evidence for *treatments*
-- https://cinema.ispm.unibe.ch/ 
-- https://doi.org/10.1371/journal.pmed.1003082 
-- https://doi.org/10.1002/cl2.1080
 
 :::
 ::: {.column width="50%"}
-<img src= "images/diabetes_netplot.png" >
+<img src = "images/diabetes_netplot.png" height = 500 >
 :::
+:::
+
+::: footer
+<a href="https://cinema.ispm.unibe.ch/" target="_blank">cinema.ispm.unibe.ch</a> ;
+Papakonstantinou *et al.* (2020) <a href="https://doi.org/10.1002/cl2.1080" target="_blank">10.1002/cl2.1080</a> 
 :::
 
 ## Acknowledgments
 
-- Tom Morris, Janion Nevill, Ryan Field, Alex Sutton, Nicola Cooper
+::: columns
+::: {.column width="70%"}
+- Naomi Bradbury, Ryan Field, Tom Morris, Clareece Nevill, Janion Nevill, Alex Sutton, Nicola Cooper
 - Wellcome
 - NIHR
 - Chan Zuckerburg Initiative
-
-::: {.column width="50%"}
+- <a href="https://www.gla.ac.uk/research/az/crsu/apps/" target="_blank">More apps</a>
+:::
+::: {.column width="30%"}
 <div> 
-<img src="images/CRSU_logo.png" width="300" style = "display: block;">
-<img src="images/nihr_logo.png" width="300" style = "display: block;">
-<img src="images/wellcome_logo.png" width="300" style = "display: block;">
+<img src="images/CRSU_logo.png" width="400" style = "display: block;">
+<img src="images/nihr_logo.png" width="400" style = "display: block;">
+<img src="images/wellcome_logo.png" width="400" style = "display: block;">
 </div>
+:::
 :::
 
