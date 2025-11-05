@@ -89,7 +89,7 @@ font-size: 30px;
   width: 100%;
   margin-left: 200px;
   text-align: center;
-  font-size: 0.85em;
+  font-size: 1em !important;
   color: #264688;
   z-index: 2;
   margin-right: 250px;
@@ -101,5 +101,3 @@ font-size: 30px;
   max-width: unset !important;
   max-height: unset !important;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap");

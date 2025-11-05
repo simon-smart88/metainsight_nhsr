@@ -1,6 +1,6 @@
 ---
 title: "MetaInsight"
-subtitle: "An R shiny app for network meta-analysis"
+subtitle: "An R Shiny app for network meta-analysis"
 author: "Simon Smart"
 format: 
   revealjs:
@@ -19,12 +19,23 @@ preload-iframes: false
 
 ## Network meta-analysis can help determine the 'best' treatment option
 
+```{css}
+h1.title {
+  background-image: url(images/mi_logo.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 400px;
+  padding: 60px 0;
+  color: #00000000;
+}
+```
+
 ::: columns
 ::: {.column width="50%"}
-<img src= "images/network_plot.png" height = 600 >
+<img src= "images/network_plot.png" height = 600 alt = "Network of six treatments where there are different numbers of trials that compared each pair">
 :::
 ::: {.column width="50%"}
-<img src= "images/ranking_plot.png" height = 600>
+<img src= "images/ranking_plot.png" height = 600 alt = "Line graph showing the output of an analysis where each treatment is ranked by outcome">
 :::
 :::
 
@@ -32,7 +43,7 @@ preload-iframes: false
 Data from Elliot & Meyer (2007) <a href="https://doi.org/10.1016/s0140-6736(07)60108-1" target="_blank">10.1016/s0140-6736(07)60108-1</a>
 :::
 
-## Complex reviews require extensive statistical and programming knowledge
+## Complex meta-analyses require extensive statistical and programming knowledge
 
 ::: {.incremental .highlight-last}
 - BUGSnet, bnma, coda, gemtc, meta, metafor, netmeta
@@ -48,14 +59,14 @@ Data from Elliot & Meyer (2007) <a href="https://doi.org/10.1016/s0140-6736(07)6
 - Originally developed by statisticians, but increasingly in collaboration with developers 
 :::
 ::: {.column width="40%"}
-<img src = "images/citations.png" >
+<img src = "images/citations.png" alt = "Line graph showing cumulative citations of Owen 2019 since 2020, now a total of 259">
 :::
 :::
 
 ```{r echo = FALSE, eval = FALSE}
 png("images/citations.png", 600, 600)
 Year <- 2020:2025	
-Citations <- c(6, 17, 28, 57, 66, 85)
+Citations <- c(6, 17, 28, 57, 66, 88)
 `Cumulative citations` <- cumsum(Citations)
 
 par(cex = 1.5, bg = '#e4fbf8')
@@ -65,7 +76,7 @@ dev.off()
 
 
 ::: footer
-Owen *et al.* (2019) <a href="https://doi.org/10.1002/jrsm.1373" target="_blank">10.1002/jrsm.1373</a>; Bradbury *et al.* (2025) <a href="https://doi.org/10.1186/s12874-024-02450-9" target="_blank">10.1186/s12874-024-02450-9</a>
+Owen *et al.* (2019) <a href="https://doi.org/10.1002/jrsm.1373" target="_blank">10.1002/jrsm.1373</a>; Bradbury *et al.* (2025) <a href="https://doi.org/10.1186/s12874-024-02450-9" target="_blank">10.1186/s12874-024-02450-9</a>; Scopus (2025-11-05)
 :::
 
 ::: notes
@@ -73,8 +84,13 @@ has users worldwide and increasing citations and use in CROs
 :::
 
 ## 
+<div style="display: flex; justify-content: center; margin-top: -80px">
+  <img src="images/metainsight_existing.png" width = 1400 alt = "Screenshot of the existing app">
+</div>
 
-<img src= "images/metainsight_existing.png" >
+<div style="position: absolute; top: 50%; right: -150px; transform: translateY(-50%);">
+  <img src="images/metainsight_old_qr.png" height = 300px">
+</div>
 
 ::: footer
 <a href="https://crsu.shinyapps.io/MetaInsight/" target="_blank">crsu.shinyapps.io/MetaInsight</a> 
@@ -97,7 +113,13 @@ has users worldwide and increasing citations and use in CROs
 
 ##
 
-<img src= "images/metainsight_new.png" >
+<div style="display: flex; justify-content: center;">
+  <img src="images/metainsight_new.png" width = 1400 alt = "Screenshot of the updated app">
+</div>
+
+<div style="position: absolute; top: 50%; right: -150px; transform: translateY(-50%);">
+  <img src="images/metainsight_new_qr.png" height = 300px">
+</div>
 
 ::: footer
 <a href="https://crsu.shinyapps.io/MetaInsight_Scholar/" target="_blank">crsu.shinyapps.io/MetaInsight_Scholar</a> 
@@ -105,8 +127,8 @@ has users worldwide and increasing citations and use in CROs
 
 ## Reproducibility relies on a strict structure
 ::: {.incremental .highlight-last}
-- Each module has an id made up of the component and module e.g. `summary_network`
-- The module calls a synonymous function `summary_network()`
+- Each module has an id made up of the component and module `summary_network`
+- Each calls a synonymous function `summary_network()`
 - Input values are stored in `common$meta$summary_network$<input id>`
 - Values are knitted into an .Rmd chunk and combined to create a .qmd
 :::
@@ -153,7 +175,7 @@ summary_network(frequentist_all,
 - Rendered in the app to produce an html report
 :::
 ::: {.column style="margin-top: -80px;"}
-<img src = "images/report.png" height = 700px>
+<img src = "images/report.png" height = 700px alt = "Screenshot of the an html report produced by the app">
 :::
 :::
 
@@ -162,20 +184,20 @@ summary_network(frequentist_all,
 - MetaInsight enables sensitivity analyses by excluding studies
 - During reviews, risk of bias information can be collected e.g.
   - Randomisation, blinding, missing data
-- Users can now upload these scores and use them to guide sensitivity analyses
+- Scores can guide sensitivity analyses
 :::
 
-## Integration with CiNEMA helps to evaluate confidence in findings
+## Integration with CINeMA helps to evaluate confidence in findings
 
 ::: columns
 ::: {.column width="50%"}
-<img src = "images/cinema_logo.svg">
+<img src = "images/cinema_logo.svg" alt = "Cinema logo">
 
 - Uses risk of bias scores for *studies* to evaluate evidence for *treatments*
 
 :::
 ::: {.column width="50%"}
-<img src = "images/diabetes_netplot.png" height = 500 >
+<img src = "images/diabetes_netplot.png" height = 500 style="margin-left: 120px;" alt = "Network plot as in the first slide but with the nodes between each treatment pair coloured according to the risk of bias>
 :::
 :::
 
@@ -184,21 +206,21 @@ summary_network(frequentist_all,
 Papakonstantinou *et al.* (2020) <a href="https://doi.org/10.1002/cl2.1080" target="_blank">10.1002/cl2.1080</a> 
 :::
 
-## Acknowledgments
+## Acknowledgments {.mediumtext}
 
 ::: columns
 ::: {.column width="70%"}
 - Naomi Bradbury, Ryan Field, Tom Morris, Clareece Nevill, Janion Nevill, Alex Sutton, Nicola Cooper
-- Wellcome
+- Wellcome (via Chan Zuckerburg Initiative)
 - NIHR
-- Chan Zuckerburg Initiative
+- <a href="mailto:ss1545@le.ac.uk">Email</a>, <a href="https://github.com/simon-smart88" target="_blank">Github</a>, <a href="https://bsky.app/profile/simonsmart.bsky.social" target="_blank">Bluesky</a>
 - <a href="https://www.gla.ac.uk/research/az/crsu/apps/" target="_blank">More apps</a>
 :::
 ::: {.column width="30%"}
 <div> 
-<img src="images/CRSU_logo.png" width="400" style = "display: block;">
-<img src="images/nihr_logo.png" width="400" style = "display: block;">
-<img src="images/wellcome_logo.png" width="400" style = "display: block;">
+<img src="images/CRSU_logo.png" width="400" style = "display: block;" alt = "CRSU logo">
+<img src="images/wellcome_logo.png" width="300" class=centre_image alt = "Wellcome logo">
+<img src="images/nihr_logo.png" width="700" style="display: block; position: absolute; right: 0;" alt = "NIHR logo">
 </div>
 :::
 :::
