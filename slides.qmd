@@ -88,8 +88,8 @@ has users worldwide and increasing citations and use in CROs
   <img src="images/metainsight_existing.png" width = 1400 alt = "Screenshot of the existing app">
 </div>
 
-<div style="position: absolute; top: 50%; right: -150px; transform: translateY(-50%);">
-  <img src="images/metainsight_old_qr.png" height = 300px">
+<div style="position: absolute; top: 50%; right: -125px; transform: translateY(-50%);">
+  <img src="images/metainsight_old_qr.png" height = 250px">
 </div>
 
 ::: footer
@@ -117,8 +117,8 @@ has users worldwide and increasing citations and use in CROs
   <img src="images/metainsight_new.png" width = 1400 alt = "Screenshot of the updated app">
 </div>
 
-<div style="position: absolute; top: 50%; right: -150px; transform: translateY(-50%);">
-  <img src="images/metainsight_new_qr.png" height = 300px">
+<div style="position: absolute; top: 50%; right: -125px; transform: translateY(-50%);">
+  <img src="images/metainsight_new_qr.png" height = 250px">
 </div>
 
 ::: footer
@@ -197,7 +197,7 @@ summary_network(frequentist_all,
 
 :::
 ::: {.column width="50%"}
-<img src = "images/diabetes_netplot.png" height = 500 style="margin-left: 120px;" alt = "Network plot as in the first slide but with the nodes between each treatment pair coloured according to the risk of bias>
+<img src = "images/diabetes_netplot.png" height = 500 style="margin-left: 120px;" alt = "Network plot as in the first slide but with the nodes between each treatment pair coloured according to the risk of bias">
 :::
 :::
 
